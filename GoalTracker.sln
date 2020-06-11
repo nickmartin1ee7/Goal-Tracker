@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.36
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoalTracker.Form", "GoalTracker.Form\GoalTracker.Form.csproj", "{D2892180-1049-4713-8064-E6F3BB459DFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoalTracker.Form", "GoalTracker.Form\GoalTracker.Form.csproj", "{D2892180-1049-4713-8064-E6F3BB459DFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoalTracker.Library", "GoalTracker.Library\GoalTracker.Library.csproj", "{FEA03233-AC37-43DA-B249-DB9677BDE134}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoalTracker.Library", "GoalTracker.Library\GoalTracker.Library.csproj", "{FEA03233-AC37-43DA-B249-DB9677BDE134}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoalTracker.Console", "GoalTracker.Console\GoalTracker.Console.csproj", "{C483822A-FA57-44C8-9EC9-56601AAF9336}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{FEA03233-AC37-43DA-B249-DB9677BDE134}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEA03233-AC37-43DA-B249-DB9677BDE134}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEA03233-AC37-43DA-B249-DB9677BDE134}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C483822A-FA57-44C8-9EC9-56601AAF9336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C483822A-FA57-44C8-9EC9-56601AAF9336}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C483822A-FA57-44C8-9EC9-56601AAF9336}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C483822A-FA57-44C8-9EC9-56601AAF9336}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
