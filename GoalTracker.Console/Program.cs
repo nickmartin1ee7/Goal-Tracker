@@ -1,7 +1,6 @@
 ﻿using System;
 using static System.Console;
 using GoalTracker.Library;
-using System.Text.Json;
 
 namespace GoalTracker.Console
 {
@@ -10,6 +9,12 @@ namespace GoalTracker.Console
         public static string nl = Environment.NewLine;
 
         static void Main()
+        {
+            MainMenu();
+        }
+
+        #region Menus
+        private static void MainMenu()
         {
             while (true)
             {
@@ -99,5 +104,6 @@ namespace GoalTracker.Console
                 }
             }
         }
+        #endregion
     }
 }
