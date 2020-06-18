@@ -1,0 +1,1 @@
+[![Build Status](https://dev.azure.com/Martins-Rad-Repo/Goal%20Tracker/_apis/build/status/Goal%20Tracker?branchName=master)](https://dev.azure.com/Martins-Rad-Repo/Goal%20Tracker/_build/latest?definitionId=1&branchName=master)
