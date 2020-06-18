@@ -9,23 +9,8 @@ namespace GoalTracker.Library
         public string Goal { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public  bool[] Progress
-        {
-            get
-            {
-                return new bool[(int)(EndDate - StartDate).TotalDays];
-            }
-        }
-        public DateTime[] DateSpan
-        {
-            get
-            {
-                var t = new DateTime[Progress.Length];
-                for (int i = 0; i < t.Length; i++)
-                    t[i] = StartDate.AddDays(i);
-                return t;
-            }
-        }
+        public bool[] Progress { get; set; }
+        public DateTime[] DateSpan { get; set; }
         #endregion
 
         #region Constructors
@@ -34,10 +19,14 @@ namespace GoalTracker.Library
             Goal = name;
             StartDate = startDate;
             EndDate = endDate;
+            CalculateMiscProps();
         }
 
         [Obsolete("Used for JSON serialization only. Does not create a stable profile on it's own.")]
-        public Profile() {}
+        public Profile()
+        {
+            CalculateMiscProps();
+        }
         #endregion
 
         #region Public
@@ -62,7 +51,7 @@ namespace GoalTracker.Library
 
         public override string ToString()
         {
-            var r =  $"Goal: {Goal}\nStart Date: {StartDate}\nEnd Date: {EndDate}";
+            var r =  $"Goal: {Goal}\nStart Date: {StartDate.ToShortDateString()}\nEnd Date: {EndDate.ToShortDateString()}";
             r += Environment.NewLine;
             r += "[#]\tDate:\t\tCompleted:";
             r += Environment.NewLine;
@@ -76,9 +65,15 @@ namespace GoalTracker.Library
 
         }
         #endregion
-        
+
         #region Private
-        
+        private void CalculateMiscProps()
+        {
+            Progress = new bool[(int)(EndDate - StartDate).TotalDays];
+            var DateSpan = new DateTime[Progress.Length];
+            for (int i = 0; i < DateSpan.Length; i++)
+                DateSpan[i] = StartDate.AddDays(i);
+        }
         #endregion
 
     }

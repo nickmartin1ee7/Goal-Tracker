@@ -7,12 +7,14 @@ namespace GoalTracker.Console
 {
     class Program
     {
+        public static string nl = Environment.NewLine;
+
         static void Main()
         {
             while (true)
             {
                 Clear();
-                WriteLine("== Goal Tracker ==" + Environment.NewLine);
+                WriteLine("== Goal Tracker ==" + nl);
 
                 Profile[] profiles = BusinessLogic.LoadProfiles();
 
@@ -30,13 +32,11 @@ namespace GoalTracker.Console
                     {
                         WriteLine($"[{i}/{profiles.Length}]\t{profiles[i]}");
                     }
-                    Write(Environment.NewLine + "Enter profile # or enter (N)ew: ");
+                    Write(nl + "Enter profile # or enter (N)ew: ");
                     var response = ReadLine();
-                    if (int.TryParse(response, out int profileNum))
+                    if (int.TryParse(response, out int profileNum) && profileNum >= 0 && profileNum < profiles.Length)
                     {
-                        Clear();
-                        WriteLine(profiles[profileNum]);
-                        ReadKey();
+                        ModifyProfileMenu(profiles[profileNum]);
                     }
                     else if (response.ToUpper() == "N" || response.ToUpper() == "New")
                     {
@@ -47,6 +47,55 @@ namespace GoalTracker.Console
                         WriteLine($"Error: {response} is an invalid option!");
                         ReadKey();
                     }
+                }
+            }
+        }
+
+        private static void ModifyProfileMenu(Profile profile)
+        {
+            bool escape = false;
+            while (!escape)
+            {
+                Clear();
+                WriteLine(profile);
+
+                Write("Enter Target Date: ");
+                var td = DateTime.Parse(ReadLine());
+
+                Write("Did you make progress towards your goal? (Y/N): ");
+                var tp = ReadLine();
+                tp = tp.ToUpper();
+
+                if (tp == "Y")
+                {
+                    if (profile.MakeProgress(td, true))
+                    {
+                        BusinessLogic.SaveProfiles();
+                        escape = true;
+                    }
+                    else
+                    {
+                        WriteLine("Error: Failed to update progress!");
+                        ReadKey();
+                    }
+                }
+                else if (tp == "N")
+                {
+                    if (profile.MakeProgress(td, false))
+                    {
+                        BusinessLogic.SaveProfiles();
+                        escape = true;
+                    }
+                    else
+                    {
+                        WriteLine("Error: Failed to update progress!");
+                        ReadKey();
+                    }
+                }
+                else
+                {
+                    WriteLine($"Error: {tp} is not Y or N!");
+                    ReadKey();
                 }
             }
         }
