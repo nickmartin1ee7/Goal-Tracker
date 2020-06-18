@@ -52,12 +52,15 @@ namespace GoalTracker.Library
         public override string ToString()
         {
             var r =  $"Goal: {Goal}\nStart Date: {StartDate.ToShortDateString()}\nEnd Date: {EndDate.ToShortDateString()}";
-            r += Environment.NewLine;
-            r += "[#]\tDate:\t\tCompleted:";
-            r += Environment.NewLine;
-            for (int i = 0; i < Progress.Length; ++i)
+            if (Progress != null && DateSpan != null)
             {
-                r += $"[{i}]\t{DateSpan[i].ToShortDateString()}\t{Progress[i]}{Environment.NewLine}";
+                r += Environment.NewLine;
+                r += "[#]\tDate:\t\tCompleted:";
+                r += Environment.NewLine;
+                for (int i = 0; i < Progress.Length; ++i)
+                {
+                    r += $"[{i}]\t{DateSpan[i].ToShortDateString()}\t{Progress[i]}{Environment.NewLine}";
+                }
             }
             r += Environment.NewLine;
 
@@ -70,8 +73,8 @@ namespace GoalTracker.Library
         private void CalculateMiscProps()
         {
             Progress = new bool[(int)(EndDate - StartDate).TotalDays];
-            var DateSpan = new DateTime[Progress.Length];
-            for (int i = 0; i < DateSpan.Length; i++)
+            DateSpan = new DateTime[Progress.Length];
+            for (int i = 0; i < Progress.Length; i++)
                 DateSpan[i] = StartDate.AddDays(i);
         }
         #endregion
