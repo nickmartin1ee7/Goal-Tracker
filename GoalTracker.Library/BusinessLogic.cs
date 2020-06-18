@@ -22,7 +22,7 @@ namespace GoalTracker.Library
                 {
                     Clear();
 
-                    WriteLine("== New profile Setup ==");
+                    WriteLine("== New profile Setup ==" + Environment.NewLine);
 
                     Write("Goal: ");
                     string goal = ReadLine();
@@ -33,18 +33,35 @@ namespace GoalTracker.Library
                     Write("End Date: ");
                     DateTime eDate = DateTime.Parse(ReadLine());
 
-                    var newProfile = new Profile(goal, sDate, eDate);
+                    if (eDate > sDate)
+                    {
+                        Profile newProfile = new Profile(goal, sDate, eDate);
 
-                    Profiles.Add(newProfile);
-                    SaveProfiles(Profiles);
+                        Profiles.Add(newProfile);
+                        SaveProfiles(Profiles);
 
-                    return newProfile;
+                        return newProfile;
+                    }
+                    else throw new FormatException();
                 }
                 catch (FormatException)
                 {
                     WriteLine($"Error: Your input was not in a valid format (01-01-20, 1/1/2020)." + Environment.NewLine + "Press any key to start over...");
                     ReadKey();
                 }
+            }
+        }
+
+        public static bool DeleteProfiles()
+        {
+            try
+            {
+                File.Delete(ProfilesFile);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 

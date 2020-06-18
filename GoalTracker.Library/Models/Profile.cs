@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace GoalTracker.Library
 {
@@ -11,6 +12,16 @@ namespace GoalTracker.Library
         public DateTime EndDate { get; set; }
         public bool[] Progress { get; set; }
         public DateTime[] DateSpan { get; set; }
+        public bool Finished
+        {
+            get
+            {
+                if (Progress.Length > 0 && !Progress.Contains(false))
+                    return true;
+                else
+                    return false;
+            }
+        }
         #endregion
 
         #region Constructors
@@ -49,12 +60,11 @@ namespace GoalTracker.Library
             return false;
         }
 
-        public override string ToString()
+        public string ViewProgress()
         {
-            var r =  $"Goal: {Goal}\nStart Date: {StartDate.ToShortDateString()}\nEnd Date: {EndDate.ToShortDateString()}";
+            string r = string.Empty;
             if (Progress != null && DateSpan != null)
             {
-                r += Environment.NewLine;
                 r += "[#]\tDate:\t\tCompleted:";
                 r += Environment.NewLine;
                 for (int i = 0; i < Progress.Length; ++i)
@@ -62,10 +72,12 @@ namespace GoalTracker.Library
                     r += $"[{i}]\t{DateSpan[i].ToShortDateString()}\t{Progress[i]}{Environment.NewLine}";
                 }
             }
-            r += Environment.NewLine;
-
             return r;
+        }
 
+        public override string ToString()
+        {
+            return $"Goal: {Goal}\nStart Date: {StartDate.ToShortDateString()}\nEnd Date: {EndDate.ToShortDateString()}";
         }
         #endregion
 
