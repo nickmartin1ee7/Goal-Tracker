@@ -126,6 +126,7 @@ namespace GoalTracker.Console
                 {
                     WriteLine($"Error: Invalid date!");
                     ReadKey();
+                    break;
                 }
             }
         }
