@@ -4,15 +4,36 @@ using System.Text;
 
 namespace GoalTracker.LibraryNew
 {
+    [Serializable]
     public class Goal : IGoal
     {
         #region Properties
+        private bool[] _progress { get; set; }
+
         public string GoalName { get; set; }
         public string GoalDescription { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool IsFinished { get; private set; }
-        public bool[] Progress { get; private set; }
+        public bool[] Progress 
+        { 
+            get
+            {
+                if (_progress == null)
+                {
+                    if (StartDate <= EndDate)
+                        return new bool[(int)(EndDate - StartDate).TotalDays];
+                    else
+                        return new bool[0];
+                }
+                else return _progress;
+            }
+
+            set
+            {
+                _progress = value;
+            }
+        }
         #endregion
 
         #region Constructors
@@ -21,7 +42,6 @@ namespace GoalTracker.LibraryNew
             GoalName = goalName;
             StartDate = startDate;
             EndDate = endDate;
-            GenerateProgressFromDateDifference();
         }
 
         public Goal(string goalName, string goalDescription, DateTime startDate, DateTime endDate)
@@ -30,18 +50,24 @@ namespace GoalTracker.LibraryNew
             GoalDescription = goalDescription;
             StartDate = startDate;
             EndDate = endDate;
-            GenerateProgressFromDateDifference();
         }
+
+        [Obsolete("DO NOT USE. USED FOR CONSTRUCTION VIA JSON SERIALIZATION.")]
+        public Goal() { }
         #endregion
 
         #region Methods
 
-        private void GenerateProgressFromDateDifference()
+        public string ViewProgress()
         {
-            if (StartDate < EndDate)
-                Progress = new bool[(int)(EndDate - StartDate).TotalDays];
-            else
-                throw new ArgumentOutOfRangeException("Start Date cannot be after End Date!");
+            string prog = "Progress:" + Environment.NewLine;
+
+            for (int i = 0; i < Progress.Length; i++)
+            {
+                prog += $"\tDate: {StartDate.AddDays(i)}\tMade Progress: {Progress[i]}" + Environment.NewLine;
+            }
+
+            return prog;
         }
 
         public bool MakeProgress(DateTime targetDate, bool madeProgress)
@@ -63,7 +89,7 @@ namespace GoalTracker.LibraryNew
 
         public void GiveUp()
         {
-            Progress = null;
+            _progress = null;
             IsFinished = true;
             EndDate = DateTime.Now;
         }

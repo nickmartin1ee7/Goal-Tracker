@@ -4,6 +4,7 @@ using System.Text;
 
 namespace GoalTracker.LibraryNew
 {
+    [Obsolete("This data context will not be passed around. And is re-instantiated every time it's referenced")]
     public class InMemoryDataContext : IDataContext
     {
         private IDatabase _db { get; set; } = Factory.GetDatabase();

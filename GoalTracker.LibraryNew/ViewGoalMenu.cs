@@ -27,8 +27,7 @@ namespace GoalTracker.LibraryNew
                     if (int.TryParse(_display.ReadLine(), out int userOption) && userOption > 0 && userOption <= _dataContext.LoadDatabase().GoalList.Count)
                     {
                         --userOption;   // Options display from 1-Length. Normalize back to index.
-                        IGoal targetGoal = _dataContext.LoadDatabase().GoalList.ElementAt(userOption);
-                        _display.PrintLine(targetGoal.ToString());
+                        PrintGoalDetails(userOption);
                         break;
                     }
                     else
@@ -41,6 +40,13 @@ namespace GoalTracker.LibraryNew
             {
                 _display.PrintError($"No goals exist yet!");
             }
+        }
+
+        private void PrintGoalDetails(int userOption)
+        {
+            IGoal targetGoal = _dataContext.LoadDatabase().GoalList.ElementAt(userOption);
+            _display.PrintLine(targetGoal.ToString());
+            _display.PrintLine(targetGoal.ViewProgress());
         }
     }
 }

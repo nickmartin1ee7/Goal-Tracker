@@ -2,24 +2,27 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace GoalTracker.LibraryNew
 {
     class JsonDataContext : IDataContext
     {
-        public FileInfo DatabaseFile { get; set; }
+        public FileInfo DatabaseFile { get; set; } = new FileInfo("Goals.db");
 
         public IDatabase LoadDatabase()
         {
+            if (!DatabaseFile.Exists)
+                using (File.Create(DatabaseFile.FullName));
+
             try
             {
-                if (DatabaseFile == null)
-                    throw new Exception("Database File does not exist!");
-                else
-                    return JsonSerializer.Deserialize<Database>(File.ReadAllText(DatabaseFile.FullName));
+                IDatabase db = JsonConvert.DeserializeObject<Database>(File.ReadAllText(DatabaseFile.FullName));
+                if (db?.GoalList?.Count > 0)
+                    return db;
+                else throw new Exception("Databse file contains no database object or goals!");
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return Factory.GetDatabase();
             }
@@ -29,7 +32,7 @@ namespace GoalTracker.LibraryNew
         {
             try
             {
-                File.WriteAllText(DatabaseFile.FullName, JsonSerializer.Serialize(database));
+                File.WriteAllText(DatabaseFile.FullName, JsonConvert.SerializeObject(database));
                 return true;
             }
             catch (Exception)

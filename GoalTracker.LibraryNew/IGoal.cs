@@ -11,6 +11,7 @@ namespace GoalTracker.LibraryNew
         bool[] Progress { get; }
         bool IsFinished { get; }
 
+        string ViewProgress();
         bool MakeProgress(DateTime targetDate, bool madeProgress);
         void GiveUp();
         string ToString();

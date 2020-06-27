@@ -67,7 +67,8 @@ namespace GoalTracker.LibraryNew
         public static IDataContext GetDataContext()
         {
             return new JsonDataContext();
-            /* // Test data
+            /*
+            // Test data
             IDataContext o = new InMemoryDataContext();
             IDatabase d = GetDatabase();
             d.GoalList = new List<Goal>()

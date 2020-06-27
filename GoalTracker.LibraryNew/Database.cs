@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GoalTracker.LibraryNew
 {
+    [Serializable]
     public class Database : IDatabase
     {
         private readonly string dblNewLine = Environment.NewLine + Environment.NewLine;
 
-        public List<Goal> GoalList { get; set; }
-
+        public List<Goal> GoalList { get; set; } = new List<Goal>();
+        
         public override string ToString()
         {
-            if (GoalList != null && GoalList.Count > 0)
+            if (GoalList?.Count > 0)
             {
                 string o = string.Empty;
 

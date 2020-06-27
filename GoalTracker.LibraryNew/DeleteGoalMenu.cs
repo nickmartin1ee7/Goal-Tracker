@@ -14,8 +14,6 @@
         public void StartUI()
         {
             throw new System.NotImplementedException();
-
-
         }
     }
 }
