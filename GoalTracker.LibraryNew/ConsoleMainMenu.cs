@@ -8,13 +8,15 @@ namespace GoalTracker.LibraryNew
     {
         private IDisplay _display { get; set; }
         private IMenuOptions _menuOptions { get; set; }
-        private IUserInteractionManager _logic{ get; set; }
+        private IUserInteractionManager _userInteractionManager{ get; set; }
+        private IDataContext _dataContext { get; set; }
 
-        public ConsoleMainMenu(IDisplay display, IMenuOptions menuOptions, IUserInteractionManager logic)
+        public ConsoleMainMenu(IDisplay display, IMenuOptions menuOptions, IUserInteractionManager userInteractionManager, IDataContext dataContext)
         {
             _display = display;
             _menuOptions = menuOptions;
-            _logic = logic;
+            _userInteractionManager = userInteractionManager;
+            _dataContext = dataContext;
         }
 
         public void StartUI()
@@ -28,17 +30,17 @@ namespace GoalTracker.LibraryNew
                     + Environment.NewLine);
 
                 // Display current goals
-                _display.PrintLine(Factory.GetDataContext().LoadDatabase().ToString());
+                _display.Print(_dataContext.LoadDatabase().ToString());
 
                // Display options
-               _display.PrintLine(Environment.NewLine + _menuOptions.ToString());
+               _display.PrintLine(_menuOptions.ToString());
 
                 // Capture user input
                 _display.Print("Select an option: ");
                 if (int.TryParse(_display.ReadLine(), out int userOption) && userOption > 0 && userOption <= _menuOptions.Options.Count)
                 {
                     --userOption;   // Options display from 1-Length. Normalize back to index.
-                    _logic.UserRequest(userOption);
+                    _userInteractionManager.UserRequest(userOption);
                     _display.WaitForKey();
                 }
                 else

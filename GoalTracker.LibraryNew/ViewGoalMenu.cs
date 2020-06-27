@@ -1,17 +1,46 @@
-﻿namespace GoalTracker.LibraryNew
+﻿using System.Linq;
+
+namespace GoalTracker.LibraryNew
 {
-    internal class ViewGoalMenu : IMenu
+    public class ViewGoalMenu : IMenu
     {
         private IDisplay _display;
+        private IDataContext _dataContext { get; set; }
 
-        public ViewGoalMenu(IDisplay display)
+        public ViewGoalMenu(IDisplay display, IDataContext dataContext)
         {
             _display = display;
+            _dataContext = dataContext;
         }
 
         public void StartUI()
         {
-            throw new System.NotImplementedException();
+            if (_dataContext.LoadDatabase().GoalList?.Count > 0)
+            {
+                while (true)
+                {
+                    System.Console.Clear(); // TODO remove
+
+                    _display.PrintLine(_dataContext.LoadDatabase().ToString());
+
+                    _display.Print("Select a goal # to View: ");
+                    if (int.TryParse(_display.ReadLine(), out int userOption) && userOption > 0 && userOption <= _dataContext.LoadDatabase().GoalList.Count)
+                    {
+                        --userOption;   // Options display from 1-Length. Normalize back to index.
+                        IGoal targetGoal = _dataContext.LoadDatabase().GoalList.ElementAt(userOption);
+                        _display.PrintLine(targetGoal.ToString());
+                        break;
+                    }
+                    else
+                    {
+                        _display.PrintError($"{userOption} is not a valid goal number!");
+                    }
+                }
+            }
+            else
+            {
+                _display.PrintError($"No goals exist yet!");
+            }
         }
     }
 }

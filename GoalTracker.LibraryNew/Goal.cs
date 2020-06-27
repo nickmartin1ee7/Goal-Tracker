@@ -38,7 +38,7 @@ namespace GoalTracker.LibraryNew
 
         private void GenerateProgressFromDateDifference()
         {
-            if (StartDate > EndDate)
+            if (StartDate < EndDate)
                 Progress = new bool[(int)(EndDate - StartDate).TotalDays];
             else
                 throw new ArgumentOutOfRangeException("Start Date cannot be after End Date!");
@@ -70,7 +70,7 @@ namespace GoalTracker.LibraryNew
 
         public override string ToString()
         {
-            return $"Goal: {GoalName}\n{GoalDescription}\nIs Finished: {IsFinished}\nStart Date: {StartDate.ToShortDateString()}\nEnd Date: {EndDate.ToShortDateString()}";
+            return $"Goal: {GoalName}\nDescription: {GoalDescription}\nIs Finished: {IsFinished}\nStart Date: {StartDate.ToShortDateString()}\nEnd Date: {EndDate.ToShortDateString()}";
         }
         #endregion
     }

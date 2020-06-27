@@ -18,7 +18,6 @@ namespace GoalTracker.LibraryNew
 
         public void UserRequest(int userOption)
         {
-            // Confirm user means to select menu item
             IConfirmationMenu confirmUserOption = Factory.GetConfirmationMenu(_menuOptions.Options.ElementAt(userOption));
             confirmUserOption.StartUI();
             if (confirmUserOption.UserApproval)
@@ -27,7 +26,7 @@ namespace GoalTracker.LibraryNew
             }
             else
             {
-                _display.PrintLine($"Cancelled action");
+                _display.PrintLine($"Action cancelled.");
             }
         }
     }

@@ -6,6 +6,8 @@ namespace GoalTracker.LibraryNew
 {
     public class Database : IDatabase
     {
+        private readonly string dblNewLine = Environment.NewLine + Environment.NewLine;
+
         public List<Goal> GoalList { get; set; }
 
         public override string ToString()
@@ -16,14 +18,14 @@ namespace GoalTracker.LibraryNew
 
                 for (int i = 0; i < GoalList.Count; i++)
                 {
-                    o += $"[{i+1}/{GoalList.Count}] - {GoalList[i]}";
+                    o += $"[{i+1}/{GoalList.Count}] - {GoalList[i]}" + dblNewLine;
                 }
 
                 return o;
             }
             else
             {
-                return "No goals exist yet!";
+                return "No goals exist yet!" + dblNewLine;
             }
         }
     }

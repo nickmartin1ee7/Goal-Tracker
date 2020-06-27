@@ -17,13 +17,13 @@ namespace GoalTracker.LibraryNew
         public static IMenu GetMainMenu()
         {
             IMenuOptions menuOptionsInstance = GetMenuOptions();
-            return new ConsoleMainMenu(GetDisplay(), menuOptionsInstance, GetUserInteractionManager(menuOptionsInstance));
+            return new ConsoleMainMenu(GetDisplay(), menuOptionsInstance, GetUserInteractionManager(menuOptionsInstance), GetDataContext());
         }
 
         public static IMenu GetMainMenu(List<string> menuOptions)
         {
             IMenuOptions menuOptionsInstance = GetMenuOptions(menuOptions);
-            return new ConsoleMainMenu(GetDisplay(), menuOptionsInstance, GetUserInteractionManager(menuOptionsInstance));
+            return new ConsoleMainMenu(GetDisplay(), menuOptionsInstance, GetUserInteractionManager(menuOptionsInstance), GetDataContext());
         }
 
         public static IUserInteractionManager GetUserInteractionManager(IMenuOptions menuOptions)
@@ -42,16 +42,16 @@ namespace GoalTracker.LibraryNew
         }
         public static IMenu GetViewGoalMenu()
         {
-            return new ViewGoalMenu(GetDisplay());
+            return new ViewGoalMenu(GetDisplay(), GetDataContext());
         }
         public static IMenu GetAddGoalMenu()
         {
-            return new AddGoalMenu(GetDisplay());
+            return new AddGoalMenu(GetDisplay(), GetDataContext());
         }
 
         public static IMenu GetDeleteGoalMenu()
         {
-            return new DeleteGoalMenu(GetDisplay());
+            return new DeleteGoalMenu(GetDisplay(), GetDataContext());
         }
 
         public static IGoal GetGoal(string goalName, DateTime startDate, DateTime endDate)
@@ -67,6 +67,18 @@ namespace GoalTracker.LibraryNew
         public static IDataContext GetDataContext()
         {
             return new JsonDataContext();
+            /* // Test data
+            IDataContext o = new InMemoryDataContext();
+            IDatabase d = GetDatabase();
+            d.GoalList = new List<Goal>()
+            {
+                new Goal("Test goal", DateTime.Now.AddDays(-5), DateTime.Now),
+                new Goal("Test goal", DateTime.Now.AddDays(-5), DateTime.Now),
+                new Goal("Test goal", DateTime.Now.AddDays(-5), DateTime.Now),
+            };
+            o.SaveDatabase(d);
+            return o;
+            */
         }
 
         public static IDatabase GetDatabase()
