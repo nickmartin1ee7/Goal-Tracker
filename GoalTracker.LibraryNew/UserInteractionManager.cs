@@ -5,12 +5,12 @@ using System.Text;
 
 namespace GoalTracker.LibraryNew
 {
-    public class BusinessLogic : IBusinessLogic
+    public class UserInteractionManager : IUserInteractionManager
     {
         private IMenuOptions _menuOptions { get; set; }
         private IDisplay _display { get; set; }
 
-        public BusinessLogic(IDisplay display, IMenuOptions menuOptions)
+        public UserInteractionManager(IDisplay display, IMenuOptions menuOptions)
         {
             _menuOptions = menuOptions;
             _display = display;
@@ -18,7 +18,7 @@ namespace GoalTracker.LibraryNew
 
         public void UserRequest(int userOption)
         {
-            // Confirm user meant to select menu item
+            // Confirm user means to select menu item
             IConfirmationMenu confirmUserOption = Factory.GetConfirmationMenu(_menuOptions.Options.ElementAt(userOption));
             confirmUserOption.StartUI();
             if (confirmUserOption.UserApproval)

@@ -14,7 +14,10 @@ namespace GoalTracker.LibraryNew
         {
             try
             {
-                return JsonSerializer.Deserialize<Database>(File.ReadAllText(DatabaseFile.FullName));
+                if (DatabaseFile == null)
+                    throw new Exception("Database File does not exist!");
+                else
+                    return JsonSerializer.Deserialize<Database>(File.ReadAllText(DatabaseFile.FullName));
             }
             catch (Exception)
             {

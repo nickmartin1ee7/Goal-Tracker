@@ -17,18 +17,18 @@ namespace GoalTracker.LibraryNew
         public static IMenu GetMainMenu()
         {
             IMenuOptions menuOptionsInstance = GetMenuOptions();
-            return new ConsoleMainMenu(GetDisplay(), menuOptionsInstance, GetBusinessLogic(menuOptionsInstance));
+            return new ConsoleMainMenu(GetDisplay(), menuOptionsInstance, GetUserInteractionManager(menuOptionsInstance));
         }
 
         public static IMenu GetMainMenu(List<string> menuOptions)
         {
             IMenuOptions menuOptionsInstance = GetMenuOptions(menuOptions);
-            return new ConsoleMainMenu(GetDisplay(), menuOptionsInstance, GetBusinessLogic(menuOptionsInstance));
+            return new ConsoleMainMenu(GetDisplay(), menuOptionsInstance, GetUserInteractionManager(menuOptionsInstance));
         }
 
-        public static IBusinessLogic GetBusinessLogic(IMenuOptions menuOptions)
+        public static IUserInteractionManager GetUserInteractionManager(IMenuOptions menuOptions)
         {
-            return new BusinessLogic(GetDisplay(), menuOptions);
+            return new UserInteractionManager(GetDisplay(), menuOptions);
         }
 
         public static IMenuOptions GetMenuOptions()

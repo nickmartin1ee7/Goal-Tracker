@@ -1,6 +1,6 @@
 ﻿namespace GoalTracker.LibraryNew
 {
-    public interface IBusinessLogic
+    public interface IUserInteractionManager
     {
         void UserRequest(int userOptions);
     }

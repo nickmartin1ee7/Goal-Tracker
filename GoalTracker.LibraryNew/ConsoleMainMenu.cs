@@ -8,9 +8,9 @@ namespace GoalTracker.LibraryNew
     {
         private IDisplay _display { get; set; }
         private IMenuOptions _menuOptions { get; set; }
-        private IBusinessLogic _logic{ get; set; }
+        private IUserInteractionManager _logic{ get; set; }
 
-        public ConsoleMainMenu(IDisplay display, IMenuOptions menuOptions, IBusinessLogic logic)
+        public ConsoleMainMenu(IDisplay display, IMenuOptions menuOptions, IUserInteractionManager logic)
         {
             _display = display;
             _menuOptions = menuOptions;
@@ -27,8 +27,11 @@ namespace GoalTracker.LibraryNew
                 _display.PrintLine("== Goal Tracker =="
                     + Environment.NewLine);
 
-                // Display options
-                _display.PrintLine(_menuOptions.ToString());
+                // Display current goals
+                _display.PrintLine(Factory.GetDataContext().LoadDatabase().ToString());
+
+               // Display options
+               _display.PrintLine(Environment.NewLine + _menuOptions.ToString());
 
                 // Capture user input
                 _display.Print("Select an option: ");
@@ -43,8 +46,6 @@ namespace GoalTracker.LibraryNew
                     _display.PrintError($"{userOption} is not a valid menu item!");
                     _display.WaitForKey();
                 }
-
-                // TODO Make IBusinessLogic
             }
         }
     }

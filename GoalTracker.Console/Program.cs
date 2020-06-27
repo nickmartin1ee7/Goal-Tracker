@@ -8,7 +8,7 @@ namespace GoalTracker.Console
     class Program
     {
         #region OldDeadCode1
-        public const bool UseOld = true;   // Change to [true], to use old, unmaintainable code
+        public const bool UseOld = false;   // Change to [true], to use old, unmaintainable code
         public static string nl = Environment.NewLine;
         #endregion
         static void Main()
