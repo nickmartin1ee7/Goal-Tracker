@@ -1,18 +1,31 @@
 ﻿using System;
 using static System.Console;
 using GoalTracker.Library;
+using GoalTracker.LibraryNew;
 
 namespace GoalTracker.Console
 {
     class Program
     {
+        #region OldDeadCode1
+        public const bool UseOld = true;   // Change to [true], to use old, unmaintainable code
         public static string nl = Environment.NewLine;
-
+        #endregion
         static void Main()
         {
-            MainMenu();
+            #region OldDeadCode2
+            if (UseOld)
+                MainMenu();
+            else
+            {
+                #endregion
+                IApplication app = Factory.GetApplication();
+                app.Run();
+                #region OldDeadCode3
+            }
+            #endregion
         }
-
+        #region OldDeadCode4
         #region Menus
         private static void MainMenu()
         {
@@ -21,7 +34,7 @@ namespace GoalTracker.Console
                 Clear();
                 WriteLine("== Goal Tracker ==" + nl);
 
-                Profile[] profiles = BusinessLogic.LoadProfiles();
+                Profile[] profiles = GoalTracker.Library.BusinessLogic.LoadProfiles();
 
                 if (profiles.Length == 0)
                 {
@@ -29,7 +42,7 @@ namespace GoalTracker.Console
                         string r = ReadLine().ToUpper();
 
                         if (r == "Y")
-                            BusinessLogic.MakeProfile();
+                        GoalTracker.Library.BusinessLogic.MakeProfile();
                 }
                 else
                 {
@@ -52,11 +65,11 @@ namespace GoalTracker.Console
                     }
                     else if (response.ToUpper() == "N" || response.ToUpper() == "NEW")
                     {
-                        BusinessLogic.MakeProfile();
+                        GoalTracker.Library.BusinessLogic.MakeProfile();
                     }
                     else if (response.ToUpper() == "D" || response.ToUpper() == "DELETE")
                     {
-                        if (!BusinessLogic.DeleteProfiles())
+                        if (!GoalTracker.Library.BusinessLogic.DeleteProfiles())
                         {
                             WriteLine("Error: Failed to delete profiles file!");
                             ReadKey();
@@ -94,7 +107,7 @@ namespace GoalTracker.Console
                     {
                         if (profile.MakeProgress(td, true))
                         {
-                            BusinessLogic.SaveProfiles();
+                            GoalTracker.Library.BusinessLogic.SaveProfiles();
                             escape = true;
                         }
                         else
@@ -107,7 +120,7 @@ namespace GoalTracker.Console
                     {
                         if (profile.MakeProgress(td, false))
                         {
-                            BusinessLogic.SaveProfiles();
+                            GoalTracker.Library.BusinessLogic.SaveProfiles();
                             escape = true;
                         }
                         else
@@ -130,6 +143,7 @@ namespace GoalTracker.Console
                 }
             }
         }
+        #endregion
         #endregion
     }
 }

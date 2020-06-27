@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GoalTracker.LibraryNew\GoalTracker.LibraryNew.csproj" />
     <ProjectReference Include="..\GoalTracker.Library\GoalTracker.Library.csproj" />
   </ItemGroup>
 
