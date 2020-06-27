@@ -8,12 +8,15 @@ namespace GoalTracker.LibraryNew
 {
     class JsonDataContext : IDataContext
     {
-        public FileInfo DatabaseFile { get; set; } = new FileInfo("Goals.db");
+        public FileInfo DatabaseFile { get; set; } = new FileInfo("Goals.json");
 
         public IDatabase LoadDatabase()
         {
             if (!DatabaseFile.Exists)
+            {
                 using (File.Create(DatabaseFile.FullName));
+                DatabaseFile = new FileInfo(DatabaseFile.FullName);
+            }
 
             try
             {

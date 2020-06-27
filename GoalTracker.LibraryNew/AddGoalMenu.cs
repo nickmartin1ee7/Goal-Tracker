@@ -39,7 +39,7 @@ namespace GoalTracker.LibraryNew
                     _display.Print("Goal End Date: ");
                     endDate = DateTime.Parse(_display.ReadLine());
 
-                    if (SaveNewGoal(goalName, goalDesc, startDate, endDate))
+                    if (startDate <= endDate && SaveNewGoal(goalName, goalDesc, startDate, endDate))
                     {
                         _display.PrintLine($"Successfully added goal: {goalName}");
                     }

@@ -21,7 +21,7 @@ namespace GoalTracker.LibraryNew
         {
             while (true)
             {
-                _display.Print($"Are you sure you want to: {SelectedOption}? y/N ");
+                _display.Print($"Are you sure you want to: {SelectedOption}? Y/N ");
 
                 string op = _display.ReadLine();
 

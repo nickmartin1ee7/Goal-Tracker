@@ -13,7 +13,7 @@ namespace GoalTracker.LibraryNew
 
         string ViewProgress();
         bool MakeProgress(DateTime targetDate, bool madeProgress);
-        void GiveUp();
+        void Finish();
         string ToString();
     }
 }

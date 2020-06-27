@@ -26,7 +26,8 @@ namespace GoalTracker.LibraryNew
             {
                 "View Goal",
                 "Add Goal",
-                "Delete Goal"
+                "Make Progress towards Goal",
+                "Finish Goal"
             };
         }
 
@@ -42,9 +43,13 @@ namespace GoalTracker.LibraryNew
                     IMenu addGoalMenu = Factory.GetAddGoalMenu();
                     addGoalMenu.StartUI();
                     break;
-                case 2: // Delete Goal
-                    IMenu deleteGoalMenu = Factory.GetDeleteGoalMenu();
-                    deleteGoalMenu.StartUI();
+                case 2: // Make progress towards goal
+                    IMenu makeProgressMenu = Factory.GetMakeProgressMenu();
+                    makeProgressMenu.StartUI();
+                    break;
+                case 3: // Finish Goal
+                    IMenu finishGoalMenu = Factory.GetFinishGoalMenu();
+                    finishGoalMenu.StartUI();
                     break;
                 default:    // INVALID OPTION
                     throw new NotImplementedException($"Specified menu option has no implementation!");

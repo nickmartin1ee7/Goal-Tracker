@@ -1,13 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace GoalTracker.LibraryNew
 {
-    public class ViewGoalMenu : IMenu
+    public class FinishGoalMenu : IMenu
     {
         private IDisplay _display;
         private IDataContext _dataContext { get; set; }
 
-        public ViewGoalMenu(IDisplay display, IDataContext dataContext)
+        public FinishGoalMenu(IDisplay display, IDataContext dataContext)
         {
             _display = display;
             _dataContext = dataContext;
@@ -19,15 +20,18 @@ namespace GoalTracker.LibraryNew
             {
                 while (true)
                 {
-                    System.Console.Clear(); // TODO remove
+                    Console.Clear(); // TODO remove
 
                     _display.PrintLine(_dataContext.LoadDatabase().ToString());
 
-                    _display.Print("Select a goal # to View: ");
+                    _display.Print("Select a goal # to Finish: ");
                     if (int.TryParse(_display.ReadLine(), out int userOption) && userOption > 0 && userOption <= _dataContext.LoadDatabase().GoalList.Count)
                     {
                         --userOption;   // Options display from 1-Length. Normalize back to index.
-                        PrintGoalDetails(userOption);
+                        if (FinishGoal(userOption))
+                            _display.PrintLine("Goal successfully Finished.");
+                        else
+                            _display.PrintError("Failed to Finish goal!");
                         break;
                     }
                     else
@@ -42,11 +46,11 @@ namespace GoalTracker.LibraryNew
             }
         }
 
-        private void PrintGoalDetails(int targetGoalIndex)
+        private bool FinishGoal(int targetGoalIndex)
         {
-            IGoal targetGoal = _dataContext.LoadDatabase().GoalList.ElementAt(targetGoalIndex);
-            _display.PrintLine(targetGoal.ToString());
-            _display.PrintLine(targetGoal.ViewProgress());
+            IDatabase db = _dataContext.LoadDatabase();
+            db.GoalList.ElementAt(targetGoalIndex).Finish();
+            return _dataContext.SaveDatabase(db);
         }
     }
 }

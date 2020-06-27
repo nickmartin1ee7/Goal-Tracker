@@ -44,14 +44,19 @@ namespace GoalTracker.LibraryNew
         {
             return new ViewGoalMenu(GetDisplay(), GetDataContext());
         }
+        public static IMenu GetMakeProgressMenu()
+        {
+            return new MakeProgressMenu(GetDisplay(), GetDataContext());
+        }
+
         public static IMenu GetAddGoalMenu()
         {
             return new AddGoalMenu(GetDisplay(), GetDataContext());
         }
 
-        public static IMenu GetDeleteGoalMenu()
+        public static IMenu GetFinishGoalMenu()
         {
-            return new DeleteGoalMenu(GetDisplay(), GetDataContext());
+            return new FinishGoalMenu(GetDisplay(), GetDataContext());
         }
 
         public static IGoal GetGoal(string goalName, DateTime startDate, DateTime endDate)

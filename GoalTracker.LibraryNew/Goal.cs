@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace GoalTracker.LibraryNew
@@ -8,30 +10,38 @@ namespace GoalTracker.LibraryNew
     public class Goal : IGoal
     {
         #region Properties
+        [JsonProperty]
         private bool[] _progress { get; set; }
+        [JsonProperty]
+        private bool _isFinished { get; set; }
 
         public string GoalName { get; set; }
         public string GoalDescription { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public bool IsFinished { get; private set; }
+        [JsonIgnore]
+        public bool IsFinished
+        {
+            get
+            {
+                // Check if Progress is all true
+                if (!_isFinished)
+                    if (!Progress.Contains(false))
+                        _isFinished = true;
+
+                return _isFinished;
+            }
+        }
+        [JsonIgnore]
         public bool[] Progress 
         { 
             get
             {
                 if (_progress == null)
                 {
-                    if (StartDate <= EndDate)
-                        return new bool[(int)(EndDate - StartDate).TotalDays];
-                    else
-                        return new bool[0];
+                    return new bool[(int)(EndDate - StartDate).TotalDays + 1];
                 }
                 else return _progress;
-            }
-
-            set
-            {
-                _progress = value;
             }
         }
         #endregion
@@ -64,7 +74,7 @@ namespace GoalTracker.LibraryNew
 
             for (int i = 0; i < Progress.Length; i++)
             {
-                prog += $"\tDate: {StartDate.AddDays(i)}\tMade Progress: {Progress[i]}" + Environment.NewLine;
+                prog += $"\tDate: {StartDate.AddDays(i).ToShortDateString()}\tMade Progress: {Progress[i]}" + Environment.NewLine;
             }
 
             return prog;
@@ -80,17 +90,22 @@ namespace GoalTracker.LibraryNew
             {
                 if (span[i].Date == targetDate.Date)
                 {
-                    Progress[i] = madeProgress;
-                    return true;
+                    bool[] tProg = Progress;
+                    tProg[i] = madeProgress;
+                    _progress = tProg;
+
+                    if (Progress[i] == madeProgress)
+                        return true;
+                    else return false;
                 }
             }
             return false;
         }
 
-        public void GiveUp()
+        public void Finish()
         {
             _progress = null;
-            IsFinished = true;
+            _isFinished = true;
             EndDate = DateTime.Now;
         }
 
