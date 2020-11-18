@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoalTracker.Console", "GoalTracker.Console\GoalTracker.Console.csproj", "{E62CE503-7EC4-44A5-AA19-3C72B2FA02D0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoalTracker.Library", "GoalTracker.LibraryNew\GoalTracker.Library.csproj", "{E259F352-6436-4BCB-B632-45535CEF515C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoalTracker.Library", "GoalTracker.Library\GoalTracker.Library.csproj", "{E259F352-6436-4BCB-B632-45535CEF515C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
