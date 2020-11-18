@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GoalTracker.Tests
 {
-    internal class FakeDatabase : IDatabase
+    internal class FakeDatabase : IGoalRepository
     {
         public List<Goal> GoalList { get; set; }
 

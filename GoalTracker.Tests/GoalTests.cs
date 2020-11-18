@@ -9,7 +9,7 @@ namespace GoalTracker.Tests
         [Fact]
         public void InstantiationTest()
         {
-            IDatabase fDb = new FakeDatabase();
+            IGoalRepository fDb = new FakeDatabase();
 
             fDb.GoalList.ForEach(goal => Console.WriteLine(goal.ToString()));
 

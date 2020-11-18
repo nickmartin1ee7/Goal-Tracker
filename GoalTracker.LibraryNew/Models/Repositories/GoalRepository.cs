@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace GoalTracker.LibraryNew
 {
     [Serializable]
-    public class Database : IDatabase
+    public class GoalRepository : IGoalRepository
     {
         private readonly string dblNewLine = Environment.NewLine + Environment.NewLine;
 

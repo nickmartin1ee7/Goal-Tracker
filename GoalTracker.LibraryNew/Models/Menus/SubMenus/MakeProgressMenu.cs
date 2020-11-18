@@ -64,7 +64,7 @@ namespace GoalTracker.LibraryNew
 
         private bool UpdateGoalProgress(int targetGoalIndex, DateTime targetDate, bool madeProgress)
         {
-            IDatabase db = _dataContext.LoadDatabase();
+            IGoalRepository db = _dataContext.LoadDatabase();
             if (db.GoalList.ElementAt(targetGoalIndex).MakeProgress(targetDate, madeProgress))
                 return _dataContext.SaveDatabase(db);
             else return false;

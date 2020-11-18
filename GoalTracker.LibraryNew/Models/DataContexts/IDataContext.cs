@@ -2,7 +2,7 @@
 {
     public interface IDataContext
     {
-        IDatabase LoadDatabase();
-        bool SaveDatabase(IDatabase database);
+        IGoalRepository LoadDatabase();
+        bool SaveDatabase(IGoalRepository database);
     }
 }

@@ -65,7 +65,7 @@ namespace GoalTracker.LibraryNew
 
         private bool InsertNewGoalIntoDatabase(IGoal newGoal)
         {
-            IDatabase db = _dataContext.LoadDatabase();
+            IGoalRepository db = _dataContext.LoadDatabase();
             db.GoalList.Add((Goal)newGoal);
             return _dataContext.SaveDatabase(db);
         }

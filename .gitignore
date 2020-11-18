@@ -341,3 +341,4 @@ healthchecksdb
 
 # Custom
 /.vscode
+GoalTracker.Console/Goals.json

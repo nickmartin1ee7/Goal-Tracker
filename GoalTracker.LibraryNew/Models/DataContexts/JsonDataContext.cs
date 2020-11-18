@@ -10,7 +10,7 @@ namespace GoalTracker.LibraryNew
     {
         public FileInfo DatabaseFile { get; set; } = new FileInfo("Goals.json");
 
-        public IDatabase LoadDatabase()
+        public IGoalRepository LoadDatabase()
         {
             if (!DatabaseFile.Exists)
             {
@@ -20,7 +20,7 @@ namespace GoalTracker.LibraryNew
 
             try
             {
-                IDatabase db = JsonConvert.DeserializeObject<Database>(File.ReadAllText(DatabaseFile.FullName));
+                IGoalRepository db = JsonConvert.DeserializeObject<GoalRepository>(File.ReadAllText(DatabaseFile.FullName));
                 if (db?.GoalList?.Count > 0)
                     return db;
                 else throw new Exception("Databse file contains no database object or goals!");
@@ -31,7 +31,7 @@ namespace GoalTracker.LibraryNew
             }
         }
 
-        public bool SaveDatabase(IDatabase database)
+        public bool SaveDatabase(IGoalRepository database)
         {
             try
             {

@@ -7,13 +7,13 @@ namespace GoalTracker.Tests
 {
     internal class FakeDataContext : IDataContext
     {
-        public IDatabase Db { get; set; } = new FakeDatabase();
-        public IDatabase LoadDatabase()
+        public IGoalRepository Db { get; set; } = new FakeDatabase();
+        public IGoalRepository LoadDatabase()
         {
             return Db;
         }
 
-        public bool SaveDatabase(IDatabase database)
+        public bool SaveDatabase(IGoalRepository database)
         {
             Db = database;
             return true;

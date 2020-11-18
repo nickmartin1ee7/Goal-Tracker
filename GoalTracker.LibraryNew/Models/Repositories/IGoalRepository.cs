@@ -2,7 +2,7 @@
 
 namespace GoalTracker.LibraryNew
 {
-    public interface IDatabase
+    public interface IGoalRepository
     {
         List<Goal> GoalList { get; set; }
 

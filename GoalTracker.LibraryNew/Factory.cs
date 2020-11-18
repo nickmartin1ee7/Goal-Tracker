@@ -87,9 +87,9 @@ namespace GoalTracker.LibraryNew
             */
         }
 
-        public static IDatabase GetDatabase()
+        public static IGoalRepository GetDatabase()
         {
-            return new Database();
+            return new GoalRepository();
         }
 
         public static IDisplay GetDisplay()

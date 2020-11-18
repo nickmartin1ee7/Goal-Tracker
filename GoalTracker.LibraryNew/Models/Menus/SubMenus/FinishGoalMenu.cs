@@ -48,7 +48,7 @@ namespace GoalTracker.LibraryNew
 
         private bool FinishGoal(int targetGoalIndex)
         {
-            IDatabase db = _dataContext.LoadDatabase();
+            IGoalRepository db = _dataContext.LoadDatabase();
             db.GoalList.ElementAt(targetGoalIndex).Finish();
             return _dataContext.SaveDatabase(db);
         }

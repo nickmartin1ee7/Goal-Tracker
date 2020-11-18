@@ -7,14 +7,14 @@ namespace GoalTracker.LibraryNew
     [Obsolete("This data context will not be passed around. And is re-instantiated every time it's referenced")]
     public class InMemoryDataContext : IDataContext
     {
-        private IDatabase _db { get; set; } = Factory.GetDatabase();
+        private IGoalRepository _db { get; set; } = Factory.GetDatabase();
 
-        public IDatabase LoadDatabase()
+        public IGoalRepository LoadDatabase()
         {
             return _db;
         }
 
-        public bool SaveDatabase(IDatabase database)
+        public bool SaveDatabase(IGoalRepository database)
         {
             if (database != null)
             {
