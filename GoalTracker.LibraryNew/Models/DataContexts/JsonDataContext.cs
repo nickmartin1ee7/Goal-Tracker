@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using GoalTracker.Library.Models.Interfaces;
+using GoalTracker.Library.Models.Repositories;
 using Newtonsoft.Json;
 
-namespace GoalTracker.LibraryNew
+namespace GoalTracker.Library.Models.DataContexts
 {
     class JsonDataContext : IDataContext
     {
@@ -14,7 +14,7 @@ namespace GoalTracker.LibraryNew
         {
             if (!DatabaseFile.Exists)
             {
-                using (File.Create(DatabaseFile.FullName));
+                File.Create(DatabaseFile.FullName);
                 DatabaseFile = new FileInfo(DatabaseFile.FullName);
             }
 
@@ -23,9 +23,9 @@ namespace GoalTracker.LibraryNew
                 IGoalRepository db = JsonConvert.DeserializeObject<GoalRepository>(File.ReadAllText(DatabaseFile.FullName));
                 if (db?.GoalList?.Count > 0)
                     return db;
-                else throw new Exception("Databse file contains no database object or goals!");
+                else throw new Exception("Database file contains no database object or goals!");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return Factory.GetDatabase();
             }

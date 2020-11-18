@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using GoalTracker.Library.Models.Interfaces;
 
-namespace GoalTracker.LibraryNew
+namespace GoalTracker.Library.Models
 {
     public class ConsoleDisplay : IDisplay
     {

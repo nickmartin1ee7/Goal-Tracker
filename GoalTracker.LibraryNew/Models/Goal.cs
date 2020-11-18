@@ -1,10 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
+using GoalTracker.Library.Models.Interfaces;
+using Newtonsoft.Json;
 
-namespace GoalTracker.LibraryNew
+namespace GoalTracker.Library.Models
 {
     [Serializable]
     public class Goal : IGoal
@@ -42,11 +41,11 @@ namespace GoalTracker.LibraryNew
                     int span = (int)(EndDate.Date - StartDate.Date).TotalDays + 1;
 
                     if (span > 0)
-                        return new bool[span];
+                        _progress = new bool[span];
                     else
                         throw new ArithmeticException("End date cannot be before Start date!");
                 }
-                else return _progress;
+                return _progress;
             }
         }
         #endregion
@@ -111,9 +110,9 @@ namespace GoalTracker.LibraryNew
         {
             _isFinished = true;
 
-            for (int i = 0; i < _progress.Length; i++)
+            for (int i = 0; i < Progress.Length; i++)
             {
-                _progress[i] = true;
+                Progress[i] = true;
             }
 
             if (DateTime.Now.Date < StartDate) EndDate = StartDate;
@@ -125,7 +124,7 @@ namespace GoalTracker.LibraryNew
             double percent = 0;
             try
             {
-                percent = (double)_progress?.Count(x => x) / (double)_progress?.Length;
+                percent = (double)Progress.Count(x => x) / (double)Progress.Length;
             }
             catch (Exception){}
 

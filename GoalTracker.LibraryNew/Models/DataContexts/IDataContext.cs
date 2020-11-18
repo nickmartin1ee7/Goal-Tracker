@@ -1,4 +1,6 @@
-﻿namespace GoalTracker.LibraryNew
+﻿using GoalTracker.Library.Models.Interfaces;
+
+namespace GoalTracker.Library.Models.DataContexts
 {
     public interface IDataContext
     {

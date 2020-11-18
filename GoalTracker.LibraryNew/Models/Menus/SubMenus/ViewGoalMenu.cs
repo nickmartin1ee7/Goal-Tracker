@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using GoalTracker.Library.Models.DataContexts;
+using GoalTracker.Library.Models.Interfaces;
 
-namespace GoalTracker.LibraryNew
+namespace GoalTracker.Library.Models.Menus.SubMenus
 {
     public class ViewGoalMenu : IMenu
     {

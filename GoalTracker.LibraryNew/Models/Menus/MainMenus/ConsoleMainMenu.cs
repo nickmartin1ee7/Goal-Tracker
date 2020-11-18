@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using GoalTracker.Library.Models.DataContexts;
+using GoalTracker.Library.Models.Interfaces;
 
-namespace GoalTracker.LibraryNew
+namespace GoalTracker.Library.Models.Menus.MainMenus
 {
     public class ConsoleMainMenu : IMenu
     {

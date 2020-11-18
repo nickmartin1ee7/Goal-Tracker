@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using GoalTracker.Library.Models.DataContexts;
+using GoalTracker.Library.Models.Interfaces;
 
-namespace GoalTracker.LibraryNew
+namespace GoalTracker.Library.Models.Menus.SubMenus
 {
     public class MakeProgressMenu : IMenu
     {
@@ -44,7 +46,7 @@ namespace GoalTracker.LibraryNew
                             else
                                 _display.PrintError("Failed to update progress for goal!");
                         }
-                        catch (FormatException e)
+                        catch (FormatException)
                         {
                             _display.PrintError("Invalid date was entered!");
                         }

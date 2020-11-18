@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GoalTracker.Library.Models.Interfaces;
 
-namespace GoalTracker.LibraryNew
+namespace GoalTracker.Library
 {
     public class Application : IApplication
     {

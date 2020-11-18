@@ -1,4 +1,5 @@
-﻿using GoalTracker.LibraryNew;
+﻿using GoalTracker.Library;
+using GoalTracker.Library.Models.Interfaces;
 
 namespace GoalTracker.Console
 {

@@ -1,4 +1,4 @@
-﻿namespace GoalTracker.LibraryNew
+﻿namespace GoalTracker.Library.Models.Interfaces
 {
     public interface IConfirmationMenu
     {

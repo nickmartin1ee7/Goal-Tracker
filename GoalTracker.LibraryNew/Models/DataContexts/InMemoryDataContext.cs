@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using GoalTracker.Library.Models.Interfaces;
 
-namespace GoalTracker.LibraryNew
+namespace GoalTracker.Library.Models.DataContexts
 {
     [Obsolete("This data context will not be passed around. And is re-instantiated every time it's referenced")]
     public class InMemoryDataContext : IDataContext

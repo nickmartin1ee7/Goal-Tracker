@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using GoalTracker.Library.Models;
+using GoalTracker.Library.Models.DataContexts;
+using GoalTracker.Library.Models.Interfaces;
+using GoalTracker.Library.Models.Menus.MainMenus;
+using GoalTracker.Library.Models.Menus.MenuOptions;
+using GoalTracker.Library.Models.Menus.SubMenus;
+using GoalTracker.Library.Models.Repositories;
 
-namespace GoalTracker.LibraryNew
+namespace GoalTracker.Library
 {
     /// <summary>
     /// Methods are used to return the current implementation of the needed interface.
