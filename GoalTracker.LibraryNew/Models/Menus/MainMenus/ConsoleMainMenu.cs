@@ -45,7 +45,7 @@ namespace GoalTracker.LibraryNew
                 }
                 else
                 {
-                    _display.PrintError($"{userOption} is not a valid menu item!");
+                    _display.PrintError($"{userOption+1} is not a valid menu item!");
                     _display.WaitForKey();
                 }
             }

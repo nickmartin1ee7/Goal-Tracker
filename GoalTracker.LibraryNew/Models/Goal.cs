@@ -39,7 +39,12 @@ namespace GoalTracker.LibraryNew
             {
                 if (_progress == null)
                 {
-                    return new bool[(int)(EndDate - StartDate).TotalDays + 1];
+                    int span = (int)(EndDate.Date - StartDate.Date).TotalDays + 1;
+
+                    if (span > 0)
+                        return new bool[span];
+                    else
+                        throw new ArithmeticException("End date cannot be before Start date!");
                 }
                 else return _progress;
             }
@@ -104,14 +109,27 @@ namespace GoalTracker.LibraryNew
 
         public void Finish()
         {
-            _progress = null;
             _isFinished = true;
-            EndDate = DateTime.Now;
+
+            for (int i = 0; i < _progress.Length; i++)
+            {
+                _progress[i] = true;
+            }
+
+            if (DateTime.Now.Date < StartDate) EndDate = StartDate;
+            else EndDate = DateTime.Now;
         }
 
         public override string ToString()
         {
-            return $"Goal: {GoalName}\nDescription: {GoalDescription}\nIs Finished: {IsFinished}\nStart Date: {StartDate.ToShortDateString()}\nEnd Date: {EndDate.ToShortDateString()}";
+            double percent = 0;
+            try
+            {
+                percent = (double)_progress?.Count(x => x) / (double)_progress?.Length;
+            }
+            catch (Exception){}
+
+            return $"Goal: {GoalName}\nDescription: {GoalDescription}\nIs Finished: {IsFinished}\nStart Date: {StartDate.ToShortDateString()}\nEnd Date: {EndDate.ToShortDateString()}\nPercent Complete: {percent:P}";
         }
         #endregion
     }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GoalTracker.LibraryNew
 {
-    public class Display : IDisplay
+    public class ConsoleDisplay : IDisplay
     {
         public void PrintLine(string message)
         {

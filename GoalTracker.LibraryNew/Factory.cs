@@ -94,7 +94,7 @@ namespace GoalTracker.LibraryNew
 
         public static IDisplay GetDisplay()
         {
-            return new Display();
+            return new ConsoleDisplay();
         }
 
         public static IConfirmationMenu GetConfirmationMenu(string selectedOption)
