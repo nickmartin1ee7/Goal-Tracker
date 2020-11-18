@@ -8,34 +8,34 @@ namespace GoalTracker.Library.Models.DataContexts
 {
     class JsonDataContext : IDataContext
     {
-        public FileInfo DatabaseFile { get; set; } = new FileInfo("Goals.json");
+        public FileInfo RepositoryFile { get; set; } = new FileInfo("Goals.json");
 
-        public IGoalRepository LoadDatabase()
+        public IGoalRepository ReadRepository()
         {
-            if (!DatabaseFile.Exists)
+            if (!RepositoryFile.Exists)
             {
-                File.Create(DatabaseFile.FullName);
-                DatabaseFile = new FileInfo(DatabaseFile.FullName);
+                File.Create(RepositoryFile.FullName);
+                RepositoryFile = new FileInfo(RepositoryFile.FullName);
             }
 
             try
             {
-                IGoalRepository db = JsonConvert.DeserializeObject<GoalRepository>(File.ReadAllText(DatabaseFile.FullName));
-                if (db?.GoalList?.Count > 0)
-                    return db;
-                else throw new Exception("Database file contains no database object or goals!");
+                IGoalRepository repo = JsonConvert.DeserializeObject<GoalRepository>(File.ReadAllText(RepositoryFile.FullName));
+                if (repo?.GoalList?.Count > 0)
+                    return repo;
+                else throw new Exception("Repository file contains no repository object or goals!");
             }
             catch (Exception)
             {
-                return Factory.GetDatabase();
+                return Factory.GetRepository();
             }
         }
 
-        public bool SaveDatabase(IGoalRepository database)
+        public bool WriteRepository(IGoalRepository repository)
         {
             try
             {
-                File.WriteAllText(DatabaseFile.FullName, JsonConvert.SerializeObject(database));
+                File.WriteAllText(RepositoryFile.FullName, JsonConvert.SerializeObject(repository));
                 return true;
             }
             catch (Exception)

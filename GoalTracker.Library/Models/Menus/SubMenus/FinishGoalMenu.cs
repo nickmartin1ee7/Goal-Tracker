@@ -18,16 +18,16 @@ namespace GoalTracker.Library.Models.Menus.SubMenus
 
         public void StartUI()
         {
-            if (_dataContext.LoadDatabase().GoalList?.Count > 0)
+            if (_dataContext.ReadRepository().GoalList?.Count > 0)
             {
                 while (true)
                 {
                     Console.Clear(); // TODO remove
 
-                    _display.PrintLine(_dataContext.LoadDatabase().ToString());
+                    _display.PrintLine(_dataContext.ReadRepository().ToString());
 
                     _display.Print("Select a goal # to Finish: ");
-                    if (int.TryParse(_display.ReadLine(), out int userOption) && userOption > 0 && userOption <= _dataContext.LoadDatabase().GoalList.Count)
+                    if (int.TryParse(_display.ReadLine(), out int userOption) && userOption > 0 && userOption <= _dataContext.ReadRepository().GoalList.Count)
                     {
                         --userOption;   // Options display from 1-Length. Normalize back to index.
                         if (FinishGoal(userOption))
@@ -50,9 +50,9 @@ namespace GoalTracker.Library.Models.Menus.SubMenus
 
         private bool FinishGoal(int targetGoalIndex)
         {
-            IGoalRepository db = _dataContext.LoadDatabase();
-            db.GoalList.ElementAt(targetGoalIndex).Finish();
-            return _dataContext.SaveDatabase(db);
+            IGoalRepository repo = _dataContext.ReadRepository();
+            repo.GoalList.ElementAt(targetGoalIndex).Finish();
+            return _dataContext.WriteRepository(repo);
         }
     }
 }

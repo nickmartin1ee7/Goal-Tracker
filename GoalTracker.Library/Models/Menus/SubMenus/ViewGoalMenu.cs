@@ -17,16 +17,16 @@ namespace GoalTracker.Library.Models.Menus.SubMenus
 
         public void StartUI()
         {
-            if (_dataContext.LoadDatabase().GoalList?.Count > 0)
+            if (_dataContext.ReadRepository().GoalList?.Count > 0)
             {
                 while (true)
                 {
                     System.Console.Clear(); // TODO remove
 
-                    _display.PrintLine(_dataContext.LoadDatabase().ToString());
+                    _display.PrintLine(_dataContext.ReadRepository().ToString());
 
                     _display.Print("Select a goal # to View: ");
-                    if (int.TryParse(_display.ReadLine(), out int userOption) && userOption > 0 && userOption <= _dataContext.LoadDatabase().GoalList.Count)
+                    if (int.TryParse(_display.ReadLine(), out int userOption) && userOption > 0 && userOption <= _dataContext.ReadRepository().GoalList.Count)
                     {
                         --userOption;   // Options display from 1-Length. Normalize back to index.
                         PrintGoalDetails(userOption);
@@ -46,7 +46,7 @@ namespace GoalTracker.Library.Models.Menus.SubMenus
 
         private void PrintGoalDetails(int targetGoalIndex)
         {
-            IGoal targetGoal = _dataContext.LoadDatabase().GoalList.ElementAt(targetGoalIndex);
+            IGoal targetGoal = _dataContext.ReadRepository().GoalList.ElementAt(targetGoalIndex);
             _display.PrintLine(targetGoal.ToString());
             _display.PrintLine(targetGoal.ViewProgress());
         }

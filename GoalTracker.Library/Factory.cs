@@ -75,25 +75,10 @@ namespace GoalTracker.Library
             return new Goal(goalName, goalDescription, startDate, endDate);
         }
 
-        public static IDataContext GetDataContext()
-        {
-            return new JsonDataContext();
-            /*
-            // Test data
-            IDataContext o = new InMemoryDataContext();
-            IDatabase d = GetDatabase();
-            d.GoalList = new List<Goal>()
-            {
-                new Goal("Test goal", DateTime.Now.AddDays(-5), DateTime.Now),
-                new Goal("Test goal", DateTime.Now.AddDays(-5), DateTime.Now),
-                new Goal("Test goal", DateTime.Now.AddDays(-5), DateTime.Now),
-            };
-            o.SaveDatabase(d);
-            return o;
-            */
-        }
+        public static IDataContext GetDataContext() =>
+            new JsonDataContext();
 
-        public static IGoalRepository GetDatabase()
+        public static IGoalRepository GetRepository()
         {
             return new GoalRepository();
         }

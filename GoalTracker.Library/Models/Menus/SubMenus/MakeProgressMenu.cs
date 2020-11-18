@@ -18,16 +18,16 @@ namespace GoalTracker.Library.Models.Menus.SubMenus
 
         public void StartUI()
         {
-            if (_dataContext.LoadDatabase().GoalList?.Count > 0)
+            if (_dataContext.ReadRepository().GoalList?.Count > 0)
             {
                 while (true)
                 {
                     Console.Clear(); // TODO remove
 
-                    _display.PrintLine(_dataContext.LoadDatabase().ToString());
+                    _display.PrintLine(_dataContext.ReadRepository().ToString());
 
                     _display.Print("Select a goal # to Update progress: ");
-                    if (int.TryParse(_display.ReadLine(), out int userOption) && userOption > 0 && userOption <= _dataContext.LoadDatabase().GoalList.Count)
+                    if (int.TryParse(_display.ReadLine(), out int userOption) && userOption > 0 && userOption <= _dataContext.ReadRepository().GoalList.Count)
                     {
                         --userOption;   // Options display from 1-Length. Normalize back to index.
 
@@ -66,15 +66,15 @@ namespace GoalTracker.Library.Models.Menus.SubMenus
 
         private bool UpdateGoalProgress(int targetGoalIndex, DateTime targetDate, bool madeProgress)
         {
-            IGoalRepository db = _dataContext.LoadDatabase();
-            if (db.GoalList.ElementAt(targetGoalIndex).MakeProgress(targetDate, madeProgress))
-                return _dataContext.SaveDatabase(db);
+            IGoalRepository repo = _dataContext.ReadRepository();
+            if (repo.GoalList.ElementAt(targetGoalIndex).MakeProgress(targetDate, madeProgress))
+                return _dataContext.WriteRepository(repo);
             else return false;
         }
 
         private void PrintGoalDetails(int targetGoalIndex)
         {
-            IGoal targetGoal = _dataContext.LoadDatabase().GoalList.ElementAt(targetGoalIndex);
+            IGoal targetGoal = _dataContext.ReadRepository().GoalList.ElementAt(targetGoalIndex);
             _display.PrintLine(targetGoal.ToString());
             _display.PrintLine(targetGoal.ViewProgress());
         }

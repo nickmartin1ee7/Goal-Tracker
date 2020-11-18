@@ -6,18 +6,18 @@ namespace GoalTracker.Library.Models.DataContexts
     [Obsolete("This data context will not be passed around. And is re-instantiated every time it's referenced")]
     public class InMemoryDataContext : IDataContext
     {
-        private IGoalRepository _db { get; set; } = Factory.GetDatabase();
+        private IGoalRepository _repo { get; set; } = Factory.GetRepository();
 
-        public IGoalRepository LoadDatabase()
+        public IGoalRepository ReadRepository()
         {
-            return _db;
+            return _repo;
         }
 
-        public bool SaveDatabase(IGoalRepository database)
+        public bool WriteRepository(IGoalRepository repository)
         {
-            if (database != null)
+            if (repository != null)
             {
-                _db = database;
+                _repo = repository;
                 return true;
             }
             else

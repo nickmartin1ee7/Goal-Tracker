@@ -30,7 +30,7 @@ namespace GoalTracker.Library.Models.Menus.MainMenus
                     + Environment.NewLine);
 
                 // Display current goals
-                _display.Print(_dataContext.LoadDatabase().ToString());
+                _display.Print(_dataContext.ReadRepository().ToString());
 
                // Display options
                _display.PrintLine(_menuOptions.ToString());

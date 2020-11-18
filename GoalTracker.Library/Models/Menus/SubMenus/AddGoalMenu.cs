@@ -61,14 +61,14 @@ namespace GoalTracker.Library.Models.Menus.SubMenus
         private bool SaveNewGoal(string goalName, string goalDesc, DateTime startDate, DateTime endDate)
         {
             IGoal newGoal = Factory.GetGoal(goalName, goalDesc, startDate, endDate);
-            return InsertNewGoalIntoDatabase(newGoal);
+            return InsertNewGoalIntoRepository(newGoal);
         }
 
-        private bool InsertNewGoalIntoDatabase(IGoal newGoal)
+        private bool InsertNewGoalIntoRepository(IGoal newGoal)
         {
-            IGoalRepository db = _dataContext.LoadDatabase();
-            db.GoalList.Add((Goal)newGoal);
-            return _dataContext.SaveDatabase(db);
+            IGoalRepository repo = _dataContext.ReadRepository();
+            repo.GoalList.Add((Goal)newGoal);
+            return _dataContext.WriteRepository(repo);
         }
     }
 }
