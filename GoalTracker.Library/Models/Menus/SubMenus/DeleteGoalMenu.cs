@@ -1,15 +1,18 @@
-﻿using System.Linq;
-using GoalTracker.Library.Models.DataContexts;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
 using GoalTracker.Library.Models.Interfaces;
 
 namespace GoalTracker.Library.Models.Menus.SubMenus
 {
-    public class ViewGoalMenu : IMenu
+    public class DeleteGoalMenu : IMenu
     {
         private IDisplay _display;
         private IDataContext _dataContext { get; set; }
 
-        public ViewGoalMenu(IDisplay display, IDataContext dataContext)
+        public DeleteGoalMenu(IDisplay display, IDataContext dataContext)
         {
             _display = display;
             _dataContext = dataContext;
@@ -25,11 +28,17 @@ namespace GoalTracker.Library.Models.Menus.SubMenus
 
                     _display.PrintLine(_dataContext.ReadRepository().ToString());
 
-                    _display.Print("Select a goal # to View: ");
+                    _display.Print("Select a goal # to Delete: ");
                     if (int.TryParse(_display.ReadLine(), out int userOption) && userOption > 0 && userOption <= _dataContext.ReadRepository().GoalList.Count)
                     {
                         --userOption;   // Options display from 1-Length. Normalize back to index.
-                        PrintGoalDetails(userOption);
+                        var repo = _dataContext.ReadRepository();
+                        repo.GoalList.RemoveAt(userOption);
+                        _dataContext.WriteRepository(repo);
+                        if (repo == _dataContext.ReadRepository())
+                            _display.PrintError("Failed to Delete goal!");
+                        else
+                            _display.PrintLine("Goal successfully Deleted.");
                         break;
                     }
                     else
@@ -42,13 +51,6 @@ namespace GoalTracker.Library.Models.Menus.SubMenus
             {
                 _display.PrintError($"No goals exist yet!");
             }
-        }
-
-        private void PrintGoalDetails(int targetGoalIndex)
-        {
-            IGoal targetGoal = _dataContext.ReadRepository().GoalList.ElementAt(targetGoalIndex);
-            _display.PrintLine(targetGoal.ToString());
-            _display.PrintLine(targetGoal.ViewProgress());
         }
     }
 }

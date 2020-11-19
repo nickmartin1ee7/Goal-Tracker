@@ -19,7 +19,7 @@ namespace GoalTracker.Library.Models.Menus.SubMenus
         {
             while (true)
             {
-                Console.Clear(); // TODO remove
+                _display.Clear();
 
                 string goalName;
                 string goalDesc;

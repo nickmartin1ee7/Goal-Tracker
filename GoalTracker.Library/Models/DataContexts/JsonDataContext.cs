@@ -21,7 +21,7 @@ namespace GoalTracker.Library.Models.DataContexts
             try
             {
                 IGoalRepository repo = JsonConvert.DeserializeObject<GoalRepository>(File.ReadAllText(RepositoryFile.FullName));
-                if (repo?.GoalList?.Count > 0)
+                if (repo?.GoalList.Count > 0)
                     return repo;
                 else throw new Exception("Repository file contains no repository object or goals!");
             }

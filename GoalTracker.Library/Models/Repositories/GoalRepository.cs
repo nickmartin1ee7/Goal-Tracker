@@ -13,7 +13,7 @@ namespace GoalTracker.Library.Models.Repositories
         
         public override string ToString()
         {
-            if (GoalList?.Count > 0)
+            if (GoalList.Count > 0)
             {
                 string o = string.Empty;
 

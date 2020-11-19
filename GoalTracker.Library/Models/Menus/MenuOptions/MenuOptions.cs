@@ -27,7 +27,8 @@ namespace GoalTracker.Library.Models.Menus.MenuOptions
                 "View Goal",
                 "Add Goal",
                 "Make Progress towards Goal",
-                "Finish Goal"
+                "Finish Goal",
+                "Delete Goal"
             };
         }
 
@@ -50,6 +51,10 @@ namespace GoalTracker.Library.Models.Menus.MenuOptions
                 case 3: // Finish Goal
                     IMenu finishGoalMenu = Factory.GetFinishGoalMenu();
                     finishGoalMenu.StartUI();
+                    break;
+                case 4: // Finish Goal
+                    IMenu deleteGoalMenu = Factory.GetDeleteGoalMenu();
+                    deleteGoalMenu.StartUI();
                     break;
                 default:    // INVALID OPTION
                     throw new NotImplementedException($"Specified menu option has no implementation!");

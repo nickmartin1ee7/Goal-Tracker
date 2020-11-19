@@ -7,5 +7,6 @@
         void PrintError(string errorMessage);
         void WaitForKey();
         string ReadLine();
+        void Clear();
     }
 }

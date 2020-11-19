@@ -18,11 +18,11 @@ namespace GoalTracker.Library.Models.Menus.SubMenus
 
         public void StartUI()
         {
-            if (_dataContext.ReadRepository().GoalList?.Count > 0)
+            if (_dataContext.ReadRepository().GoalList.Count > 0)
             {
                 while (true)
                 {
-                    Console.Clear(); // TODO remove
+                    _display.Clear();
 
                     _display.PrintLine(_dataContext.ReadRepository().ToString());
 

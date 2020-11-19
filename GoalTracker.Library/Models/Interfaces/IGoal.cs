@@ -11,9 +11,9 @@ namespace GoalTracker.Library.Models.Interfaces
         bool[] Progress { get; }
         bool IsFinished { get; }
 
-        string ViewProgress();
         bool MakeProgress(DateTime targetDate, bool madeProgress);
         void Finish();
         string ToString();
+        string ViewProgress();
     }
 }
